@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "project"
+		},
+		{
+			"path": "api"
+		},
+		{
+			"path": "webapp"
+		}
+	],
+	"settings": {}
+}

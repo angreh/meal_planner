@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  # mp-api:
+  #   container_name: mp-api
+  #   build:
+  #     context: ./../api
+  #   ports:
+  #     - "8080:8080"
+
+  mp-postgres:
+    container_name: mp-postgres
+    image: "postgres:14.2"
+    ports:
+      - "5432:5432"
+    user: "1000:1000"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: meal_planner
+    volumes:
+      - ./db-data/postgres/:/var/lib/postgresql/data/

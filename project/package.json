@@ -1,0 +1,27 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "ts-node": "USE_TS=true ts-node",
+    "migrate:rollback": "knex --knexfile db-control/knexfile.ts migrate:rollback",
+    "migrate:make": "knex --knexfile db-control/knexfile.ts migrate:make -x ts",
+    "migrate:latest": "knex --knexfile db-control/knexfile.ts migrate:latest",
+    "migrate:up": "knex --knexfile db-control/knexfile.ts migrate:up",
+    "seed:make": "knex --knexfile db-control/knexfile.ts seed:make -x ts",
+    "seed:run": "knex --knexfile db-control/knexfile.ts seed:run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/knex": "^0.16.1",
+    "@types/node": "^20.12.7",
+    "dotenv": "^16.4.5",
+    "knex": "^3.1.0",
+    "pg": "^8.11.5",
+    "ts-node": "^10.9.2"
+  }
+}
