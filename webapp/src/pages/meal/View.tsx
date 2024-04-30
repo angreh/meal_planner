@@ -3,22 +3,18 @@ import { useMutation } from "@tanstack/react-query";
 import { useMealStore } from "@stores/meal";
 import { add } from "data/repo/meal";
 
-const Meal = () => {
-  const { view, setView } = useMealStore();
+const MealPage = () => {
+  const { meal, setMealProperty } = useMealStore();
 
   const mutation = useMutation({
     mutationFn: async () => {
-      add(view);
-      console.log("save", view);
+      add(meal);
+      console.log("save", meal);
     },
     onSuccess: () => {
       console.log("success saved");
     },
   });
-
-  const onChangeHandler = (e: any, key: string) => {
-    setView({ ...view, [key]: e.target.value });
-  };
 
   return (
     <>
@@ -28,24 +24,36 @@ const Meal = () => {
 
       <p>This is the Meal page</p>
 
-      <pre>{JSON.stringify(view, null, 2)}</pre>
+      <pre>{JSON.stringify(meal, null, 2)}</pre>
+      <input
+        type="text"
+        placeholder="name"
+        value={meal.name}
+        onChange={(e) => setMealProperty("name", e.target.value, "string")}
+      />
       <input
         type="text"
         placeholder="description"
-        value={view.description}
-        onChange={(e) => onChangeHandler(e, "description")}
+        value={meal.description}
+        onChange={(e) =>
+          setMealProperty("description", e.target.value, "string")
+        }
       />
       <input
         type="text"
         placeholder="preparation"
-        value={view.preparation}
-        onChange={(e) => onChangeHandler(e, "preparation")}
+        value={meal.preparation}
+        onChange={(e) =>
+          setMealProperty("preparation", e.target.value, "string")
+        }
       />
       <input
         type="text"
         placeholder="time"
-        value={view.time}
-        onChange={(e) => onChangeHandler(e, "time")}
+        value={meal.preparationTime}
+        onChange={(e) =>
+          setMealProperty("preparationTime", e.target.value, "number")
+        }
       />
 
       <div>
@@ -66,4 +74,4 @@ const Meal = () => {
   );
 };
 
-export default Meal;
+export default MealPage;

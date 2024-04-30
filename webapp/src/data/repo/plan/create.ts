@@ -1,6 +1,5 @@
 export const create = (plan: any) => {
-  console.log("create", plan);
-  fetch("http://localhost:8080/api/v1/plan", {
+  fetch("http://localhost:8080/api/v1/plans", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

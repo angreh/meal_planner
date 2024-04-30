@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { usePlanStore } from "@stores/plan";
+import { useMealStore } from "@stores/meal";
 
 import { Plan } from "@appTypes/plan";
 
 export const list = async (): Promise<Plan[]> => {
-  const res = await fetch("http://localhost:8080/api/v1/plans");
+  const res = await fetch("http://localhost:8080/api/v1/meals");
   const parsedRes = await res.json();
   return parsedRes.data;
 };
 
 export const useList = () => {
-  const { plans, setPlans } = usePlanStore();
+  const { meals, setMeals } = useMealStore();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["plans"],
@@ -21,12 +21,12 @@ export const useList = () => {
 
   useEffect(() => {
     if (data) {
-      setPlans(data);
+      setMeals(data);
     }
-  }, [data, setPlans]);
+  }, [data, setMeals]);
 
   return {
-    plans,
+    meals,
     isLoading,
     isError,
   };

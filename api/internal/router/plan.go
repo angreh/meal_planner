@@ -6,13 +6,14 @@ import (
 
 func definePlanRoutes() {
 	// list all plans
+	mux.Get("/api/v1/plans", handlers.Plan.List)
 
 	// view plan
 
 	// remove plan
 
 	// create plan
-	mux.Post("/api/v1/plan", handlers.Plan.Add)
+	mux.Post("/api/v1/plans", handlers.Plan.Add)
 
 	// update plan
 

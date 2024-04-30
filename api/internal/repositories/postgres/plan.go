@@ -25,3 +25,31 @@ func (r *PlanRepository) Create(plan interfaces.PlanData) any {
 
 	return newID
 }
+
+func (r *PlanRepository) List() []*interfaces.PlanData {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	query := `SELECT * FROM plan`
+
+	rows, err := db.CON.QueryContext(ctx, query)
+	if err != nil {
+		log.Println("Error listing plans", err)
+	}
+	defer rows.Close()
+
+	var plans []*interfaces.PlanData
+
+	for rows.Next() {
+		var plan interfaces.PlanData
+		err = rows.Scan(&plan.ID, &plan.BeginDate, &plan.EndDate)
+		if err != nil {
+			log.Println("Error scanning plan", err)
+		}
+		plans = append(plans, &plan)
+	}
+
+	log.Println("Listing plans", plans)
+
+	return plans
+}

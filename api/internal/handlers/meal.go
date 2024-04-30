@@ -12,6 +12,21 @@ import (
 type MealHandler struct{}
 
 // list all meals
+func (h *MealHandler) List(w http.ResponseWriter, r *http.Request) {
+	result := repositories.GetRepository().Meal.List()
+
+	payload := utils.JSONResponse{
+		Data:    result,
+		Error:   false,
+		Message: "plans listed",
+	}
+
+	err := utils.WriteJSON(w, http.StatusOK, payload)
+	if err != nil {
+		log.Println(err)
+		utils.ErrorJSON(w, err)
+	}
+}
 
 // save meal
 // decides between CREATE or UPDATE

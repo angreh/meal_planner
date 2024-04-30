@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useList } from "../../data/repo/plan";
 
-const Plans = () => {
+const PlansPage = () => {
   const { plans, isLoading, isError } = useList();
 
   if (isLoading) return <div>Loading...</div>;
@@ -26,4 +26,4 @@ const Plans = () => {
   );
 };
 
-export default Plans;
+export default PlansPage;

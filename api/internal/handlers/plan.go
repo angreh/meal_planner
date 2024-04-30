@@ -11,7 +11,21 @@ import (
 
 type PlanHandler struct{}
 
-// list all plans
+func (h *PlanHandler) List(w http.ResponseWriter, r *http.Request) {
+	result := repositories.GetRepository().Plan.List()
+
+	payload := utils.JSONResponse{
+		Data:    result,
+		Error:   false,
+		Message: "plans listed",
+	}
+
+	err := utils.WriteJSON(w, http.StatusOK, payload)
+	if err != nil {
+		log.Println(err)
+		utils.ErrorJSON(w, err)
+	}
+}
 
 // view plan
 
