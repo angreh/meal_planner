@@ -10,6 +10,9 @@ type MealData struct {
 
 type MealRepository interface {
 	List() []*MealData
+	Get(id int) *MealData
+
+	AddIngredient(mealID, ingrendientID, amount int) any
 
 	// testing
 	Add(meal MealData) any

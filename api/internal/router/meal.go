@@ -5,19 +5,17 @@ import (
 )
 
 func defineMealRoutes() {
-	// list all meals
 	mux.Get("/api/v1/meals", handlers.Meal.List)
-
-	// save meal
-	// decides between CREATE or UPDATE
+	mux.Get("/api/v1/meals/{id}", handlers.Meal.Get)
 
 	// create meal
 
 	// update meal
 
-	// view meal
-
 	// delete meal
+
+	// ingredients
+	mux.Get("/api/v1/meals/{id}/ingredients", handlers.Meal.ListIngredients)
 
 	// testing
 	mux.Post("/api/v1/meals", handlers.Meal.Add)

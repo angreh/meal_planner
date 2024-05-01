@@ -6,16 +6,18 @@ import (
 )
 
 type RepositoryRegistry struct {
-	Meal interfaces.MealRepository
-	Plan interfaces.PlanRepository
+	Meal       interfaces.MealRepository
+	Plan       interfaces.PlanRepository
+	Ingredient interfaces.IngredientRepository
 }
 
 var repo *RepositoryRegistry
 
 func Init() {
 	repo = &RepositoryRegistry{
-		Meal: &postgres.MealRepository{},
-		Plan: &postgres.PlanRepository{},
+		Meal:       &postgres.MealRepository{},
+		Plan:       &postgres.PlanRepository{},
+		Ingredient: &postgres.IngredientRepository{},
 	}
 }
 

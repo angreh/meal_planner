@@ -3,9 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useGet, create } from "data/repo/plan";
 import { useParams } from "react-router-dom";
 
-const Plan = () => {
-  const { id } = useParams();
-  const { plans } = useGet(Number(id));
+type PlanPageProps = {
+  id: "plan-create" | "plan-edit";
+};
+const PlanPage = ({ id }: PlanPageProps) => {
+  const { id: planId } = useParams();
+  const { plans } = useGet(Number(planId));
 
   const { plan, setPlanProperty } = usePlanStore();
 
@@ -47,4 +50,4 @@ const Plan = () => {
   );
 };
 
-export default Plan;
+export default PlanPage;

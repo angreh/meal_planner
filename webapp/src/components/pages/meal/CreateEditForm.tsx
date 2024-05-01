@@ -1,14 +1,24 @@
+import { Meal } from "@appTypes/meal";
+import { useMealStore } from "@stores/meal";
 import { useMutation } from "@tanstack/react-query";
 
-import { useMealStore } from "@stores/meal";
-import { add } from "data/repo/meal";
-
-const MealPage = () => {
+type CreateEditFormProps = {
+  saveFn: (meal: Meal) => void;
+  isError?: boolean;
+  isLoading?: boolean;
+  errorMessage?: string;
+};
+const CreateEditForm = ({
+  saveFn,
+  isError = false,
+  isLoading = false,
+  errorMessage = "",
+}: CreateEditFormProps) => {
   const { meal, setMealProperty } = useMealStore();
 
   const mutation = useMutation({
     mutationFn: async () => {
-      add(meal);
+      saveFn(meal);
       console.log("save", meal);
     },
     onSuccess: () => {
@@ -20,7 +30,7 @@ const MealPage = () => {
     <>
       <h1>Meal</h1>
 
-      {mutation.isError && <p>Error: {mutation.error.message}</p>}
+      {(mutation.isError || isError) && <p>Error: {errorMessage}</p>}
 
       <p>This is the Meal page</p>
 
@@ -56,22 +66,14 @@ const MealPage = () => {
         }
       />
 
-      <div>
-        <h2>Ingredients</h2>
-        <input type="text" placeholder="title" />
-        <input type="text" placeholder="description" />
-        <input type="text" placeholder="howToPick" />
-        <input type="text" placeholder="amount" />
-      </div>
-
-      <br />
-
-      {mutation.isPending && <p>Saving...</p>}
-      <button disabled={mutation.isPending} onClick={mutation.mutate as any}>
+      {(mutation.isPending || isLoading) && <p>Saving...</p>}
+      <button
+        disabled={mutation.isPending || isLoading}
+        onClick={mutation.mutate as any}>
         Save
       </button>
     </>
   );
 };
 
-export default MealPage;
+export default CreateEditForm;

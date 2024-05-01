@@ -16,6 +16,9 @@ interface mealsState {
     type: MealPropertyType
   ) => void;
   setMeals: (list: any) => void;
+
+  resetMeal: () => void;
+  resetMeals: () => void;
 }
 
 export const useMealStore = create<mealsState>((set) => ({
@@ -45,4 +48,17 @@ export const useMealStore = create<mealsState>((set) => ({
   },
   setMeal: (meal: Meal) => set({ meal }),
   setMeals: (meals: any) => set({ meals }),
+
+  resetMeal: () =>
+    set({
+      meal: {
+        id: undefined,
+        image: undefined,
+        name: "",
+        description: undefined,
+        preparation: undefined,
+        preparationTime: undefined,
+      },
+    }),
+  resetMeals: () => set({ meals: [] }),
 }));

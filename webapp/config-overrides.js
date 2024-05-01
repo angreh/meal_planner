@@ -8,6 +8,7 @@ module.exports = function override(config, env) {
     "@pages": path.resolve(__dirname, "src/pages"),
     "@appTypes": path.resolve(__dirname, "src/types"),
     "@layouts": path.resolve(__dirname, "src/layouts"),
+    "@data": path.resolve(__dirname, "src/data"),
   };
   return config;
 };

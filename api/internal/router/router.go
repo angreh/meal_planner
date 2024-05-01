@@ -19,6 +19,7 @@ func Init() http.Handler {
 	defineHomeRoutes()
 	definePlanRoutes()
 	defineMealRoutes()
+	defineIngredientRoutes()
 
 	http.Handle("/", mux)
 

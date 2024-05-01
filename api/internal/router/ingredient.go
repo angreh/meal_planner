@@ -1,11 +1,17 @@
 package router
 
-// add ingredient to meal with amount
+import "sibgreh.com/meal_planner/internal/handlers"
 
-// save igredient ( create or update)
+func defineIngredientRoutes() {
+	// add ingredient to meal with amount
+	mux.Post("/api/v1/ingredients", handlers.Ingredient.Create)
 
-// remove ingredient
+	// save igredient ( create or update)
 
-// view ingredient
+	// remove ingredient
 
-// list all ingredients
+	// view ingredient
+
+	// list all ingredients
+
+}
