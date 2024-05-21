@@ -1,4 +1,4 @@
-export type Meal = {
+type Meal = {
   id?: number;
   image?: string;
   name: string;
@@ -6,3 +6,5 @@ export type Meal = {
   preparation?: string;
   preparationTime?: number;
 };
+
+export { type Meal };

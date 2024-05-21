@@ -7,6 +7,7 @@ import Meals from "@pages/meal/List";
 import Plan from "@pages/plan/View";
 import MealEdit from "@pages/meal/Edit";
 import MealCreate from "@pages/meal/Create";
+import Groceries from "@pages/plan/Groceries";
 
 const routes = createBrowserRouter([
   {
@@ -17,8 +18,9 @@ const routes = createBrowserRouter([
       { index: true, element: <Home /> },
       // plans
       { path: "plans", element: <Plans /> },
-      { path: "plan/create", element: <Plan id="plan-create" /> },
-      { path: "plan/:id", element: <Plan id="plan-edit" /> },
+      { path: "plan/create", element: <Plan /> },
+      { path: "plan/:id", element: <Plan /> },
+      { path: "plan/:id/groceries", element: <Groceries /> },
       // meals
       { path: "meals", element: <Meals /> },
       { path: "meal/create", element: <MealCreate /> },

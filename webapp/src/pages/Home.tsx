@@ -1,16 +1,25 @@
-import { NavLink } from "react-router-dom";
+import { Button } from "@components/ui/button";
+import {
+  Card,
+  CardContent, CardHeader,
+  CardTitle
+} from "@components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
-    <>
-      <h1>Home Page</h1>
-      <p>This is a test</p>
-      <div>
-        <NavLink to="/plans">Manage Plans</NavLink>
-        <br />
-        <NavLink to="/meals">Manage Meals</NavLink>
-      </div>
-    </>
+    <Card>
+      <CardHeader>
+        <CardTitle>Home Page</CardTitle>
+      </CardHeader>
+
+      <CardContent>
+        <Button onClick={() => navigate("/plans")}>Plan</Button>&nbsp;
+        <Button onClick={() => navigate("/meals")}>Meal</Button>
+      </CardContent>
+    </Card>
   );
 };
 

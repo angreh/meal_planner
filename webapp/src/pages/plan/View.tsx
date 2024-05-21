@@ -1,22 +1,28 @@
-import { usePlanStore } from "@stores/plan";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+
+import { Input } from "@components/ui/input";
+import { usePlanStore } from "@stores/plan";
 import { useGet, create } from "data/repo/plan";
-import { useParams } from "react-router-dom";
+import { Button } from "@components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
+import AvailableMeals from "@components/meal/AvailableMeals";
+import { SelectedMeals } from "@components/meal/SelectedMeals";
 
-type PlanPageProps = {
-  id: "plan-create" | "plan-edit";
-};
-const PlanPage = ({ id }: PlanPageProps) => {
+const PlanPage = () => {
+  const navigate = useNavigate();
   const { id: planId } = useParams();
-  const { plans } = useGet(Number(planId));
 
-  const { plan, setPlanProperty } = usePlanStore();
+  useGet(Number(planId));
+
+  const { plan, setPlanProperty, meals } = usePlanStore();
 
   const mutation = useMutation({
     mutationFn: async () => {
-      const parsedPlan = {...plan};
+      const parsedPlan = { ...plan } as any;
       parsedPlan.beginDate = new Date(plan.beginDate);
       parsedPlan.endDate = new Date(plan.endDate);
+      parsedPlan.meals = meals;
 
       await create(parsedPlan);
     },
@@ -27,24 +33,54 @@ const PlanPage = ({ id }: PlanPageProps) => {
 
   return (
     <>
-      <div>Plan Page View/Edit/Create</div>
-      <pre>{JSON.stringify(plans, null, 2)}</pre>
-      <div>
-        <input
-          type="text"
-          placeholder="Date Start"
-          value={plan.beginDate}
-          onChange={(e) => setPlanProperty("beginDate", e.target.value)}
-        />
-        <br />
-        <input
-          type="text"
-          placeholder="Date End"
-          value={plan.endDate}
-          onChange={(e) => setPlanProperty("endDate", e.target.value)}
-        />
-        <br />
-        <button onClick={mutation.mutate as any}>Save</button>
+      {/* Plan data */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Plan</CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <Input
+            type="text"
+            placeholder="Date Start"
+            value={plan.beginDate}
+            onChange={(e) => setPlanProperty("beginDate", e.target.value)}
+          />
+          <br />
+          <Input
+            type="text"
+            placeholder="Date End"
+            value={plan.endDate}
+            onChange={(e) => setPlanProperty("endDate", e.target.value)}
+          />
+          <br />
+        </CardContent>
+      </Card>
+      <br />
+
+      {/* Selected meals */}
+      <SelectedMeals />
+      <br />
+
+      <Button
+        onClick={() => navigate(`/plan/${planId!}/groceries`)}
+        variant="secondary"
+        className="w-full">
+        Generate Groceries List
+      </Button>
+      <br />
+      <br />
+
+      {/* Available meals */}
+      <AvailableMeals />
+      <br />
+
+      {/* Actions */}
+      <div className="p-4 flex justify-between">
+        <Button onClick={() => navigate("/plans")} variant="outline">
+          Back
+        </Button>
+        <Button onClick={mutation.mutate as any}>Save</Button>
       </div>
     </>
   );

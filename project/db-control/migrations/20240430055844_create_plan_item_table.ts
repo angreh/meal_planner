@@ -10,7 +10,7 @@ export async function up(knex: Knex): Promise<void> {
       .unsigned()
       .notNullable()
       .references("id")
-      .inTable("meal");
+      .inTable("plan");
     table
       .integer("meal_id", 10)
       .unsigned()

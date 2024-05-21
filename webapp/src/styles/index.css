@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --background: 0 0% 11%;
+    --foreground: 0 0% 70%;
+
+    --muted: 0 0% 40%;
+    --muted-foreground: 0 0% 50%;
+
+    --accent: 29 100% 50%;
+    --accent-foreground: 210 40% 98%;
+
+    --popover: 224 71% 4%;
+    --popover-foreground: 215 20.2% 65.1%;
+
+    --border: 0 0% 30%;
+    --input: 170 76% 37%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 80%;
+
+    --primary: 29 100% 50%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+
+    --secondary: 170 57% 49%;
+    --secondary-foreground: 167 100% 19%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 0 0% 30%;
+
+    --radius: 0.5rem;
+
+    --blue: 171 84% 82%;
+    --purple: 267 100% 83%;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  {{/* background: url("../wallpaper.jpg") no-repeat center center fixed; */}}
+  {{/* background-size: cover; */}}
+}
+
+.bg-soft {
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.bg-rush {
+  background: rgba(0, 0, 0);
+}
+
+.mp-btn-outline {
+  background: transparent;
+  border: 1px solid hsl(var(--muted-foreground));
+  color: hsl(var(--muted-foreground));
+  box-shadow: none;
+}
+
+.mp-btn-secodary {
+  background: hsl(var(--muted-foreground));
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}

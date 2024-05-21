@@ -10,5 +10,7 @@
 			"path": "webapp"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"jest.enable": false
+	}
 }

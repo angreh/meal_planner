@@ -7,8 +7,8 @@ import (
 func definePlanRoutes() {
 	// list all plans
 	mux.Get("/api/v1/plans", handlers.Plan.List)
-
-	// view plan
+	mux.Get("/api/v1/plans/{id}", handlers.Plan.Get)
+	mux.Get("/api/v1/plans/{id}/groceries", handlers.Plan.GenerateGroceries)
 
 	// remove plan
 

@@ -3,6 +3,7 @@ package handlers
 import (
 	"log"
 	"net/http"
+	"strconv"
 
 	"sibgreh.com/meal_planner/internal/repositories"
 	repositoriesInterfaces "sibgreh.com/meal_planner/internal/repositories/interfaces"
@@ -11,15 +12,29 @@ import (
 
 type IngredientHandler struct{}
 
+type IngredientData struct {
+	Amount      string  `json:"amount"`
+	IsNew       bool    `json:"isNew"`
+	Name        string  `json:"name"`
+	Description string  `json:"description"`
+	HowToPick   string  `json:"howToPick"`
+	ID          float32 `json:"id"`
+}
+
 // add ingredient to meal with amount
 func (h *IngredientHandler) Create(w http.ResponseWriter, r *http.Request) {
 	// create ingredient
+	// var requestData struct {
+	// 	Name        string `json:"name"`
+	// 	Description string `json:"description"`
+	// 	HowToPick   string `json:"howToPick"`
+	// 	MealID      int    `json:"mealId"`
+	// 	Amount      int    `json:"amount"`
+	// }
+
 	var requestData struct {
-		Name        string `json:"name"`
-		Description string `json:"description"`
-		HowToPick   string `json:"howToPick"`
-		MealID      int    `json:"mealId"`
-		Amount      int    `json:"amount"`
+		MealID      int              `json:"mealId"`
+		Ingredients []IngredientData `json:"ingredients"`
 	}
 
 	err := utils.ReadJSON(w, r, &requestData)
@@ -29,15 +44,36 @@ func (h *IngredientHandler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ingredientID := repositories.GetRepository().Ingredient.Create(repositoriesInterfaces.IngredientData{
-		Name:        requestData.Name,
-		Description: requestData.Description,
-		HowToPick:   requestData.HowToPick,
-	})
+	// var ingredientID int
+	for _, ingredient := range requestData.Ingredients {
+		ingredientID := repositories.GetRepository().Ingredient.Create(repositoriesInterfaces.IngredientData{
+			Name:        ingredient.Name,
+			Description: ingredient.Description,
+			HowToPick:   ingredient.HowToPick,
+		})
 
-	relResult := repositories.GetRepository().Meal.AddIngredient(requestData.MealID, ingredientID, requestData.Amount)
+		amount, err := strconv.Atoi(ingredient.Amount)
+		if err != nil {
+			log.Println("error converting amount to string", err)
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
 
-	log.Println("added ingredient to meal", relResult)
+		repositories.GetRepository().Meal.AddIngredient(requestData.MealID, ingredientID, amount)
+	}
+
+	payload := utils.JSONResponse{
+		Data:    requestData,
+		Error:   false,
+		Message: "Ingredients added",
+	}
+
+	err = utils.WriteJSON(w, http.StatusOK, payload)
+	if err != nil {
+		log.Println("error writing json", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 }
 
 // save igredient ( create or update)

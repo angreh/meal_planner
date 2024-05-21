@@ -37,10 +37,12 @@ export const useMealStore = create<mealsState>((set) => ({
     value: string | number,
     type: MealPropertyType
   ) => {
+    console.log("setMealProperty", key, value, type);
+
     if (type === "number") {
       set((prev) => ({
         ...prev,
-        view: { ...prev.meal, [key]: Number(value) },
+        meal: { ...prev.meal, [key]: Number(value) },
       }));
     } else {
       set((prev) => ({ ...prev, meal: { ...prev.meal, [key]: value } }));

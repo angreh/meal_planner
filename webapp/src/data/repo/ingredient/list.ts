@@ -15,7 +15,7 @@ export const useList = () => {
   const { ingredients, setIngredients } = useIngredientStore();
 
   const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ["plans"],
+    queryKey: ["ingredients"],
     queryFn: list,
   });
 

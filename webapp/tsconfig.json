@@ -23,7 +23,7 @@
       "@appTypes/*": ["types/*"],
       "@layouts/*": ["layouts/*"],
       "@data/*": ["data/*"],
-      // "@*": ["*"]
+      // "@/*": ["*"],
     }
   },
   "include": ["src"]

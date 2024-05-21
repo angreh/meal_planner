@@ -1,14 +1,9 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 
-import { add, useGet } from "@data/repo/meal";
 import { useMealStore } from "@stores/meal";
-import MealCreateEditForm from "@components/pages/meal/CreateEditForm";
-import IngredientCreatEditForm from "@components/pages/ingredient/CreateEditForm";
+import MealCreateEditForm from "@components/meal/CreateEditForm";
 
 const MealEditPage = () => {
-  const { id: mealID } = useParams();
-  const { isLoading, isError, error } = useGet(Number(mealID));
 
   const { resetMeal } = useMealStore();
 
@@ -18,14 +13,7 @@ const MealEditPage = () => {
 
   return (
     <>
-      <MealCreateEditForm
-        saveFn={add}
-        isError={isError}
-        isLoading={isLoading}
-        errorMessage={error ? error.message : ""}
-      />
-      <hr />
-      <IngredientCreatEditForm mealID={+mealID!} />
+      <MealCreateEditForm />
     </>
   );
 };

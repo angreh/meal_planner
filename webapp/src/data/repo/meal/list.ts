@@ -3,9 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useMealStore } from "@stores/meal";
 
-import { Plan } from "@appTypes/plan";
+import { Meal } from "@appTypes/meal";
 
-export const list = async (): Promise<Plan[]> => {
+export const list = async (): Promise<Meal[]> => {
   const res = await fetch("http://localhost:8080/api/v1/meals");
   const parsedRes = await res.json();
   return parsedRes.data;
@@ -15,7 +15,7 @@ export const useList = () => {
   const { meals, setMeals } = useMealStore();
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["plans"],
+    queryKey: ["meals"],
     queryFn: list,
   });
 

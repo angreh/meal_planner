@@ -7,34 +7,44 @@ type Plan = {
   id: number;
   beginDate: string;
   endDate: string;
+  meals: number[];
 };
 
 export const get = async (itemID: number): Promise<Plan> => {
-  console.log("get", itemID);
+  const res = await fetch("http://localhost:8080/api/v1/plans/" + itemID, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const parsedRes = await res.json();
 
-  return {
-    id: 1,
-    beginDate: "2024-01-01",
-    endDate: "2024-01-31",
-  };
+  return parsedRes.data;
 };
 
 export const useGet = (itemID: number) => {
-  const { plans, setPlans } = usePlanStore();
+  const { plan, setPlan, addMeal, resetMeals } = usePlanStore();
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["plans"],
+    queryKey: ["plan"],
     queryFn: async () => get(itemID),
   });
 
   useEffect(() => {
     if (data) {
-      setPlans(data);
+      resetMeals();
+      setPlan({
+        id: data.id,
+        beginDate: data.beginDate,
+        endDate: data.endDate,
+      });
+      data.meals.forEach((mealID) => {
+        addMeal(mealID);
+      });
     }
-  }, [data, setPlans]);
+  }, [data, setPlan, addMeal, resetMeals]);
 
   return {
-    plans,
+    plan,
     isLoading,
     isError,
   };

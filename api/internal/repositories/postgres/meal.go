@@ -35,8 +35,6 @@ func (r *MealRepository) List() []*interfaces.MealData {
 		meals = append(meals, &meal)
 	}
 
-	log.Println("Listing plans", meals)
-
 	return meals
 }
 
@@ -51,8 +49,6 @@ func (r *MealRepository) Get(mealID int) *interfaces.MealData {
 	if err != nil {
 		log.Println("Error listing meals", err)
 	}
-
-	log.Println("Listing plans", meal)
 
 	return &meal
 }

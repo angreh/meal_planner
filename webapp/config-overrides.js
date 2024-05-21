@@ -9,6 +9,7 @@ module.exports = function override(config, env) {
     "@appTypes": path.resolve(__dirname, "src/types"),
     "@layouts": path.resolve(__dirname, "src/layouts"),
     "@data": path.resolve(__dirname, "src/data"),
+    // "@/": path.resolve(__dirname, "src/"),
   };
   return config;
 };
