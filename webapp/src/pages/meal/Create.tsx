@@ -1,31 +1,15 @@
-import { useNavigate } from "react-router-dom";
-
-import CreateEditFormMeal from "@components/meal/CreateEditForm";
-import CreateEditActions from "@components/meal/CreateEditActions";
-import IngredientsCard from "@components/ingredient/IngredientsCard";
-import { useAdd } from "@data/repo/meal/add";
-import { useIngredientStore } from "@stores/ingredient";
+import { Actions } from "@components/pages/meals/create/actions";
+import { Form } from "@components/pages/meals/create/form";
+import { Ingredients } from "@components/pages/meals/create/ingredients";
+import { PageHolder } from "@components/ui/pageHolder";
 
 const MealEditPage = () => {
-  const navigate = useNavigate();
-  const { addIngredient } = useIngredientStore();
-  const { mutation } = useAdd();
-
-  const addHandler = async () => {
-    await mutation.mutateAsync();
-    navigate("/meals");
-  };
-
   return (
-    <>
-      <CreateEditFormMeal />
-      <br />
-
-      <IngredientsCard saveFn={addIngredient} />
-      <br />
-
-      <CreateEditActions saveFn={addHandler} backFn={() => navigate("/meals")} />
-    </>
+    <PageHolder>
+      <Form />
+      <Ingredients />
+      <Actions />
+    </PageHolder>
   );
 };
 

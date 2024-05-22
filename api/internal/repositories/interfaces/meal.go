@@ -16,4 +16,5 @@ type MealRepository interface {
 
 	// testing
 	Add(meal MealData) any
+	Update(meal MealData) any
 }

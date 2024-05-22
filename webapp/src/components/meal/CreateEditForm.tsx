@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 import { Input } from "@components/ui/input";
 import { Textarea } from "@components/ui/textarea";
-import { useMealStore } from "@stores/meal";
 import { Label } from "@components/ui/label";
+import { useMealStore } from "@stores/meal";
 
-const CreateEditForm = () => {
+export const CreateEditForm = () => {
   const { meal, setMealProperty } = useMealStore();
 
   return (
@@ -68,5 +68,3 @@ const CreateEditForm = () => {
     </>
   );
 };
-
-export default CreateEditForm;

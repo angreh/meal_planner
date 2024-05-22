@@ -23,12 +23,12 @@ interface mealsState {
 
 export const useMealStore = create<mealsState>((set) => ({
   meal: {
-    id: undefined,
-    image: undefined,
+    id: 0,
+    image: "",
     name: "",
-    description: undefined,
-    preparation: undefined,
-    preparationTime: undefined,
+    description: "",
+    preparation: "",
+    preparationTime: 0,
   },
   meals: [],
 
@@ -37,8 +37,6 @@ export const useMealStore = create<mealsState>((set) => ({
     value: string | number,
     type: MealPropertyType
   ) => {
-    console.log("setMealProperty", key, value, type);
-
     if (type === "number") {
       set((prev) => ({
         ...prev,
@@ -54,12 +52,12 @@ export const useMealStore = create<mealsState>((set) => ({
   resetMeal: () =>
     set({
       meal: {
-        id: undefined,
-        image: undefined,
+        id: 0,
+        image: "",
         name: "",
-        description: undefined,
-        preparation: undefined,
-        preparationTime: undefined,
+        description: "",
+        preparation: "",
+        preparationTime: 0,
       },
     }),
   resetMeals: () => set({ meals: [] }),

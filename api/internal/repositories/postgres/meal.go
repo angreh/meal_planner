@@ -68,6 +68,33 @@ func (m *MealRepository) Add(meal interfaces.MealData) any {
 	return newID
 }
 
+func (m *MealRepository) Update(meal interfaces.MealData) any {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	query := `UPDATE meal SET name=$1, description=$2, preparation=$3, preparation_time=$4 WHERE id=$5`
+
+	result, err := db.CON.ExecContext(
+		ctx,
+		query,
+		meal.Name,
+		meal.Description,
+		meal.Preparation,
+		meal.PreparationTime,
+		meal.ID,
+	)
+	if err != nil {
+		log.Println("Error inserting meal", err)
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		log.Println("Error getting affected rows", err)
+	}
+
+	return rowsAffected
+}
+
 func (m *MealRepository) AddIngredient(mealID int, ingredientID int, amount int) any {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()

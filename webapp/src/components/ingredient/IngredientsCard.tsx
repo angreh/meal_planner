@@ -1,4 +1,3 @@
-
 import List from "./List";
 import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 import CreateEditForm from "./CreateEditForm";
@@ -16,7 +15,6 @@ const IngredientsCard = ({ saveFn }: IngredientsCardProps) => {
 
         <CardContent>
           <CreateEditForm title="Add Ingredient" saveFn={saveFn} />
-          <br />
 
           <List />
         </CardContent>

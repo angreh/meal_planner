@@ -11,6 +11,7 @@ func defineMealRoutes() {
 	// create meal
 
 	// update meal
+	mux.Put("/api/v1/meals", handlers.Meal.Update)
 
 	// delete meal
 

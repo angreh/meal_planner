@@ -1,13 +1,7 @@
-import { Button } from "@components/ui/button";
-import {
-  Card,
-  CardContent, CardHeader,
-  CardTitle
-} from "@components/ui/card";
-import { useNavigate } from "react-router-dom";
+import { Content } from "@components/pages/home/content";
+import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 
 const Home = () => {
-  const navigate = useNavigate();
 
   return (
     <Card>
@@ -16,8 +10,7 @@ const Home = () => {
       </CardHeader>
 
       <CardContent>
-        <Button onClick={() => navigate("/plans")}>Plan</Button>&nbsp;
-        <Button onClick={() => navigate("/meals")}>Meal</Button>
+        <Content />
       </CardContent>
     </Card>
   );

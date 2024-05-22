@@ -2,7 +2,13 @@ import { create } from "zustand";
 
 import { Ingredient } from "@appTypes/ingredient";
 
-type IngredientProperty = "id" | "image" | "name" | "description" | "howToPick" | "amount";
+type IngredientProperty =
+  | "id"
+  | "image"
+  | "name"
+  | "description"
+  | "howToPick"
+  | "amount";
 
 interface ingredientState {
   ingredient: Ingredient;
@@ -12,6 +18,8 @@ interface ingredientState {
   setIngredientProperty: (key: IngredientProperty, value: string) => void;
   setIngredients: (ingredient: Ingredient[]) => void;
   addIngredient: () => void;
+
+  resetIngredients: () => void;
 }
 
 export const useIngredientStore = create<ingredientState>((set) => ({
@@ -45,4 +53,6 @@ export const useIngredientStore = create<ingredientState>((set) => ({
       };
     });
   },
+
+  resetIngredients: () => set({ ingredients: [] }),
 }));

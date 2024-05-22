@@ -75,18 +75,33 @@ func (h *MealHandler) Get(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// save meal
-// decides between CREATE or UPDATE
+func (h *MealHandler) Update(w http.ResponseWriter, r *http.Request) {
+	var meal repositoriesInterfaces.MealData
 
-// create meal
+	err := utils.ReadJSON(w, r, &meal)
+	if err != nil {
+		log.Println("error reading meal", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 
-// update meal
+	result := repositories.GetRepository().Meal.Update(meal)
 
-// view meal
+	payload := utils.JSONResponse{
+		Data:    result,
+		Error:   false,
+		Message: "meal added",
+	}
+
+	err = utils.WriteJSON(w, http.StatusCreated, payload)
+	if err != nil {
+		log.Println(err)
+		utils.ErrorJSON(w, err)
+	}
+}
 
 // delete meal
 
-// testing
 func (h *MealHandler) Add(w http.ResponseWriter, r *http.Request) {
 	var meal repositoriesInterfaces.MealData
 

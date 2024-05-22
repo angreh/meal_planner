@@ -4,12 +4,7 @@ import { usePlanStore } from "@stores/plan";
 
 export const SelectedMeals = () => {
   const { meals } = useMealStore();
-  const {
-    plan,
-    setPlanProperty,
-    meals: selectedMeals,
-    removeMeal,
-  } = usePlanStore();
+  const { meals: selectedMeals, removeMeal } = usePlanStore();
 
   // console.log(meals.filter((meal) => selectedMeals.includes(meal.id)));
   const filteredMeals = meals.filter((meal) => selectedMeals.includes(meal.id));

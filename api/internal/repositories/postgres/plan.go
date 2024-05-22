@@ -119,3 +119,26 @@ func (r *PlanRepository) GenerateGroceries(planID int) any {
 
 	return ingredients
 }
+
+// func (r *PlanRepository) Update(plan interfaces.PlanData) any {
+// 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+// 	defer cancel()
+
+// 	var newID int
+// 	query := `INSERT INTO plan (begin_date, end_date) VALUES ($1, $2) RETURNING id`
+
+// 	err := db.CON.QueryRowContext(ctx, query, plan.BeginDate, plan.EndDate).Scan(&newID)
+// 	if err != nil {
+// 		log.Println("Error inserting plan", err)
+// 	}
+
+// 	for _, meal := range plan.Meals {
+// 		query = `INSERT INTO plan_item (plan_id, meal_id) VALUES ($1, $2)`
+// 		err = db.CON.QueryRowContext(ctx, query, newID, meal).Err()
+// 		if err != nil {
+// 			log.Println("error inserting meal into plan", err)
+// 		}
+// 	}
+
+// 	return newID
+// }

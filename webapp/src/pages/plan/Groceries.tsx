@@ -47,7 +47,7 @@ export default function Groceries() {
   }
 
   return (
-    <>
+    <div className="space-y-4">
       <Card>
         <CardHeader>
           <CardTitle>Ingredients</CardTitle>
@@ -76,13 +76,12 @@ export default function Groceries() {
           </Table>
         </CardContent>
       </Card>
-      <br />
       <Button
         variant="outline"
         className="w-full"
         onClick={() => navigate("/plan/" + planId)}>
         Back
       </Button>
-    </>
+    </div>
   );
 }

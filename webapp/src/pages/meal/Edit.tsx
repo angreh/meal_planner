@@ -1,20 +1,15 @@
-import { useEffect } from "react";
-
-import { useMealStore } from "@stores/meal";
-import MealCreateEditForm from "@components/meal/CreateEditForm";
+import { Actions } from "@components/pages/meals/edit/actions";
+import { Form } from "@components/pages/meals/edit/form";
+import { Ingredients } from "@components/pages/meals/edit/ingredients";
+import { PageHolder } from "@components/ui/pageHolder";
 
 const MealEditPage = () => {
-
-  const { resetMeal } = useMealStore();
-
-  useEffect(() => {
-    return resetMeal;
-  }, [resetMeal]);
-
   return (
-    <>
-      <MealCreateEditForm />
-    </>
+    <PageHolder>
+      <Form />
+      <Ingredients />
+      <Actions />
+    </PageHolder>
   );
 };
 
